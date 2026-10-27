@@ -1,2 +1,2 @@
 # SmartPantryManager
-Smart Psntry Manager 
+Smart Pantry Manager 

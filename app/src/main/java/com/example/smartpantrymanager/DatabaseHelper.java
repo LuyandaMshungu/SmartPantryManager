@@ -59,6 +59,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + COL_UNIT + " TEXT NOT NULL, "
                 + "FOREIGN KEY(" + COL_RECIPE_ID + ") REFERENCES "
                 + TABLE_RECIPE + "(" + COL_ID + ") ON DELETE CASCADE)");
+        seedRecipes(db);
     }
 
     @Override
@@ -70,7 +71,56 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    private void addRecipe(SQLiteDatabase db, String name, String steps,
+                           Object[][] ingredients) {
+        ContentValues recipeValues = new ContentValues();
+        recipeValues.put(COL_NAME, name);
+        recipeValues.put(COL_STEPS, steps);
+        long recipeId = db.insert(TABLE_RECIPE, null, recipeValues);
 
+        for (Object[] ing : ingredients) {
+            ContentValues iv = new ContentValues();
+            iv.put(COL_RECIPE_ID, recipeId);
+            iv.put(COL_NORMALIZED, (String) ing[0]);
+            iv.put(COL_QUANTITY, ((Number) ing[1]).doubleValue());
+            iv.put(COL_UNIT, (String) ing[2]);
+            db.insert(TABLE_RECIPE_ING, null, iv);
+        }
+    }
+
+    private void seedRecipes(SQLiteDatabase db) {
+
+        addRecipe(db, "Scrambled Eggs",
+                "1. Beat the eggs with the milk.\n"
+                        + "2. Melt the butter in a pan on medium heat.\n"
+                        + "3. Pour in the eggs and stir gently until just set.",
+                new Object[][]{
+                        {"egg", 3, "pcs"},
+                        {"milk", 30, "ml"},
+                        {"butter", 10, "g"}
+                });
+
+        addRecipe(db, "Cheese Omelette",
+                "1. Beat the eggs.\n"
+                        + "2. Melt the butter in a pan and add the eggs.\n"
+                        + "3. Sprinkle the cheese on top, fold and serve.",
+                new Object[][]{
+                        {"egg", 3, "pcs"},
+                        {"cheese", 50, "g"},
+                        {"butter", 10, "g"}
+                });
+
+        addRecipe(db, "Simple Tomato Pasta",
+                "1. Boil the pasta until soft, then drain.\n"
+                        + "2. Fry the chopped onion and tomatoes until soft.\n"
+                        + "3. Mix the sauce through the pasta and season.",
+                new Object[][]{
+                        {"pasta", 200, "g"},
+                        {"tomato", 4, "pcs"},
+                        {"onion", 1, "pcs"}
+                });
+
+    }
 
     public long addPantryItem(PantryItem item) {
         SQLiteDatabase db = getWritableDatabase();
