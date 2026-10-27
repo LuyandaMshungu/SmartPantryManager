@@ -120,6 +120,144 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         {"onion", 1, "pcs"}
                 });
 
+        addRecipe(db, "Buttered Toast",
+                "1. Toast the bread.\n"
+                        + "2. Spread the butter on while still warm.",
+                new Object[][]{
+                        {"bread", 2, "pcs"},
+                        {"butter", 10, "g"}
+                });
+
+        addRecipe(db, "Cheese Toast",
+                "1. Butter the bread lightly.\n"
+                        + "2. Top with cheese.\n"
+                        + "3. Grill until the cheese melts and bubbles.",
+                new Object[][]{
+                        {"bread", 2, "pcs"},
+                        {"cheese", 40, "g"},
+                        {"butter", 5, "g"}
+                });
+
+        addRecipe(db, "French Toast",
+                "1. Whisk the eggs and milk together.\n"
+                        + "2. Dip each slice of bread in the mixture.\n"
+                        + "3. Fry in butter until golden on both sides.",
+                new Object[][]{
+                        {"bread", 4, "pcs"},
+                        {"egg", 2, "pcs"},
+                        {"milk", 100, "ml"},
+                        {"butter", 10, "g"}
+                });
+
+        addRecipe(db, "Pancakes",
+                "1. Mix the flour, egg and milk into a smooth batter.\n"
+                        + "2. Melt a little butter in a pan.\n"
+                        + "3. Pour in batter and cook until golden, flipping once.",
+                new Object[][]{
+                        {"flour", 200, "g"},
+                        {"egg", 1, "pcs"},
+                        {"milk", 300, "ml"},
+                        {"butter", 20, "g"}
+                });
+
+        addRecipe(db, "Mac and Cheese",
+                "1. Boil the pasta and drain.\n"
+                        + "2. Melt the butter, add the milk and cheese and stir until smooth.\n"
+                        + "3. Mix the sauce through the pasta.",
+                new Object[][]{
+                        {"pasta", 200, "g"},
+                        {"cheese", 100, "g"},
+                        {"milk", 200, "ml"},
+                        {"butter", 20, "g"}
+                });
+
+        addRecipe(db, "Egg Fried Rice",
+                "1. Heat the oil and fry the chopped onion.\n"
+                        + "2. Add the cooked rice and stir-fry.\n"
+                        + "3. Push the rice aside, scramble the eggs, then mix together.",
+                new Object[][]{
+                        {"rice", 200, "g"},
+                        {"egg", 2, "pcs"},
+                        {"onion", 1, "pcs"},
+                        {"oil", 15, "ml"}
+                });
+
+        addRecipe(db, "Tuna Salad",
+                "1. Drain the tuna.\n"
+                        + "2. Chop the tomatoes and onion.\n"
+                        + "3. Mix everything together in a bowl.",
+                new Object[][]{
+                        {"tuna", 1, "pcs"},
+                        {"tomato", 2, "pcs"},
+                        {"onion", 1, "pcs"}
+                });
+
+        addRecipe(db, "Tomato Soup",
+                "1. Fry the chopped onion in butter until soft.\n"
+                        + "2. Add the chopped tomatoes and a little water.\n"
+                        + "3. Simmer for 20 minutes, then blend until smooth.",
+                new Object[][]{
+                        {"tomato", 6, "pcs"},
+                        {"onion", 1, "pcs"},
+                        {"butter", 20, "g"}
+                });
+
+        addRecipe(db, "Garlic Bread",
+                "1. Mash the garlic into the butter.\n"
+                        + "2. Spread it on the bread.\n"
+                        + "3. Bake at 180 C for 10 minutes.",
+                new Object[][]{
+                        {"bread", 4, "pcs"},
+                        {"garlic", 2, "pcs"},
+                        {"butter", 30, "g"}
+                });
+
+        addRecipe(db, "Mashed Potato",
+                "1. Peel and boil the potatoes until soft.\n"
+                        + "2. Drain and mash with the butter and milk.",
+                new Object[][]{
+                        {"potato", 4, "pcs"},
+                        {"butter", 30, "g"},
+                        {"milk", 100, "ml"}
+                });
+
+        addRecipe(db, "Banana Smoothie",
+                "1. Peel the bananas.\n"
+                        + "2. Blend with the milk until smooth.",
+                new Object[][]{
+                        {"banana", 2, "pcs"},
+                        {"milk", 250, "ml"}
+                });
+
+        addRecipe(db, "Peanut Butter Sandwich",
+                "1. Spread the peanut butter on one slice of bread.\n"
+                        + "2. Top with the second slice.",
+                new Object[][]{
+                        {"bread", 2, "pcs"},
+                        {"peanut butter", 30, "g"}
+                });
+
+        addRecipe(db, "Rice and Beans",
+                "1. Fry the chopped onion until soft.\n"
+                        + "2. Add the beans and cook for 10 minutes.\n"
+                        + "3. Serve over the cooked rice.",
+                new Object[][]{
+                        {"rice", 200, "g"},
+                        {"bean", 200, "g"},
+                        {"onion", 1, "pcs"}
+                });
+
+        addRecipe(db, "Chicken Stir-Fry",
+                "1. Slice the chicken and onion.\n"
+                        + "2. Heat the oil and fry the chicken until cooked through.\n"
+                        + "3. Add the onion, cook for 3 minutes and serve with rice.",
+                new Object[][]{
+                        {"chicken", 300, "g"},
+                        {"onion", 1, "pcs"},
+                        {"oil", 15, "ml"},
+                        {"rice", 150, "g"}
+                });
+
     }
 
     public long addPantryItem(PantryItem item) {
