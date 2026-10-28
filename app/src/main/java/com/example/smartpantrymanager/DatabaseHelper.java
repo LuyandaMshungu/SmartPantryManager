@@ -308,6 +308,64 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 new String[]{String.valueOf(id)});
     }
 
+    public List<Recipe> getAllRecipes() {
+        List<Recipe> list = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor c = db.query(TABLE_RECIPE, null, null, null, null, null,
+                COL_NAME + " COLLATE NOCASE ASC");
+        try {
+            while (c.moveToNext()) {
+                Recipe recipe = new Recipe(
+                        c.getInt(c.getColumnIndexOrThrow(COL_ID)),
+                        c.getString(c.getColumnIndexOrThrow(COL_NAME)),
+                        c.getString(c.getColumnIndexOrThrow(COL_STEPS)));
+                recipe.setIngredients(getIngredientsForRecipe(db, recipe.getId()));
+                list.add(recipe);
+            }
+        } finally {
+            c.close();
+        }
+        return list;
+    }
+
+    public Recipe getRecipe(int id) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor c = db.query(TABLE_RECIPE, null, COL_ID + " = ?",
+                new String[]{String.valueOf(id)}, null, null, null);
+        try {
+            if (c.moveToFirst()) {
+                Recipe recipe = new Recipe(
+                        c.getInt(c.getColumnIndexOrThrow(COL_ID)),
+                        c.getString(c.getColumnIndexOrThrow(COL_NAME)),
+                        c.getString(c.getColumnIndexOrThrow(COL_STEPS)));
+                recipe.setIngredients(getIngredientsForRecipe(db, recipe.getId()));
+                return recipe;
+            }
+            return null;
+        } finally {
+            c.close();
+        }
+    }
+
+    private List<RecipeIngredient> getIngredientsForRecipe(SQLiteDatabase db, int recipeId) {
+        List<RecipeIngredient> ingredients = new ArrayList<>();
+        Cursor c = db.query(TABLE_RECIPE_ING, null, COL_RECIPE_ID + " = ?",
+                new String[]{String.valueOf(recipeId)}, null, null, null);
+        try {
+            while (c.moveToNext()) {
+                ingredients.add(new RecipeIngredient(
+                        c.getInt(c.getColumnIndexOrThrow(COL_ID)),
+                        recipeId,
+                        c.getString(c.getColumnIndexOrThrow(COL_NORMALIZED)),
+                        c.getDouble(c.getColumnIndexOrThrow(COL_QUANTITY)),
+                        c.getString(c.getColumnIndexOrThrow(COL_UNIT))));
+            }
+        } finally {
+            c.close();
+        }
+        return ingredients;
+    }
+
 
     private ContentValues toContentValues(PantryItem item) {
         ContentValues values = new ContentValues();
