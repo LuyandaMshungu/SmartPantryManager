@@ -1,9 +1,9 @@
 package com.example.smartpantrymanager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
@@ -48,11 +48,11 @@ public class MainActivity extends AppCompatActivity
         recyclerView.setAdapter(adapter);
 
         FloatingActionButton fab = findViewById(R.id.fabAdd);
-        fab.setOnClickListener(v ->
 
-                Toast.makeText(this, "Add screen coming next", Toast.LENGTH_SHORT).show());
+        fab.setOnClickListener(v ->
+                startActivity(new Intent(this, AddEditActivity.class)));
     }
-    
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -70,8 +70,9 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onItemClick(PantryItem item) {
-        // Placeholder: next step opens the Edit screen here
-        Toast.makeText(this, "Edit screen coming next", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, AddEditActivity.class);
+        intent.putExtra(AddEditActivity.EXTRA_ITEM_ID, item.getId());
+        startActivity(intent);
     }
 
     @Override
