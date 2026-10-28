@@ -17,7 +17,7 @@ public class IngredientUtils {
             } else if (n.endsWith("oes")) {
                 n = n.substring(0, n.length() - 2);
             } else if (n.endsWith("s") && !n.endsWith("ss")) {
-                n = n.substring(0, n.length() - 1);         
+                n = n.substring(0, n.length() - 1);
             }
         }
         return n;
