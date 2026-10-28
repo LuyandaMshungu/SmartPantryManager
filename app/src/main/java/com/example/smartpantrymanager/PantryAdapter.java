@@ -54,7 +54,7 @@ public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.ViewHolder
         PantryItem item = items.get(position);
 
         holder.textName.setText(item.getName());
-        
+
         double q = item.getQuantity();
         String qtyText = (q == Math.floor(q)) ? String.valueOf((long) q) : String.valueOf(q);
         holder.textQuantity.setText(qtyText + " " + item.getUnit());
