@@ -1,4 +1,4 @@
-package com.example.smartpantrymanager; // change to your own package name
+package com.example.smartpantrymanager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,9 +20,14 @@ public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.ViewHolder
 
     private List<PantryItem> items = new ArrayList<>();
     private final OnItemActionListener listener;
+    private boolean showExpiry = true;
 
     public PantryAdapter(OnItemActionListener listener) {
         this.listener = listener;
+    }
+
+    public void setShowExpiry(boolean showExpiry) {
+        this.showExpiry = showExpiry;
     }
 
     public void setItems(List<PantryItem> newItems) {
@@ -60,7 +65,7 @@ public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.ViewHolder
         holder.textQuantity.setText(qtyText + " " + item.getUnit());
 
         String expiry = item.getExpiryDate();
-        if (expiry == null || expiry.isEmpty()) {
+        if (!showExpiry || expiry == null || expiry.isEmpty()) {
             holder.textExpiry.setVisibility(View.GONE);
         } else {
             holder.textExpiry.setVisibility(View.VISIBLE);
