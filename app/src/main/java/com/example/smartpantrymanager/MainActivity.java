@@ -3,6 +3,7 @@ package com.example.smartpantrymanager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -48,9 +49,16 @@ public class MainActivity extends AppCompatActivity
         recyclerView.setAdapter(adapter);
 
         FloatingActionButton fab = findViewById(R.id.fabAdd);
-
         fab.setOnClickListener(v ->
                 startActivity(new Intent(this, AddEditActivity.class)));
+
+        Button btnSuggest = findViewById(R.id.btnSuggest);
+        btnSuggest.setOnClickListener(v ->
+                startActivity(new Intent(this, SuggestedRecipesActivity.class)));
+
+        Button btnSettings = findViewById(R.id.btnSettings);
+        btnSettings.setOnClickListener(v ->
+                startActivity(new Intent(this, SettingsActivity.class)));
     }
 
     @Override
@@ -61,6 +69,9 @@ public class MainActivity extends AppCompatActivity
 
     private void loadItems() {
         List<PantryItem> items = db.getAllPantryItems();
+        boolean showExpiry = getSharedPreferences(SettingsActivity.PREFS_NAME, MODE_PRIVATE)
+                .getBoolean(SettingsActivity.KEY_SHOW_EXPIRY, true);
+        adapter.setShowExpiry(showExpiry);
         adapter.setItems(items);
 
         boolean empty = items.isEmpty();
